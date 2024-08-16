@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import DOMPurify from 'dompurify';
 import { FaBold, FaItalic, FaUnderline, FaStrikethrough, FaAlignLeft, FaAlignCenter, FaAlignRight } from 'react-icons/fa';
 
 const RichTextEditor = ({ value, onChange }) => {
@@ -11,7 +12,9 @@ const RichTextEditor = ({ value, onChange }) => {
             const selection = window.getSelection();
             const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
 
-            setEditorContent(value);
+            // Add class to <p> tags
+            const updatedContent = addClassToParagraphs(value);
+            setEditorContent(updatedContent);
             
             // Restore cursor position if needed
             if (range) {
@@ -23,6 +26,15 @@ const RichTextEditor = ({ value, onChange }) => {
             }
         }
     }, [value]);
+
+    const addClassToParagraphs = (html) => {
+        // Parse and add class to each <p> tag
+        const div = document.createElement('div');
+        div.innerHTML = html;
+        const paragraphs = div.querySelectorAll('p');
+        paragraphs.forEach(p => p.classList.add('description-text'));
+        return DOMPurify.sanitize(div.innerHTML); 
+    };
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -58,7 +70,6 @@ const RichTextEditor = ({ value, onChange }) => {
     const handleAlignRight = () => {
         document.execCommand('justifyRight', false, null);
     };
-
 
     const handleInput = () => {
         if (editorRef.current) {
@@ -125,7 +136,6 @@ const RichTextEditor = ({ value, onChange }) => {
                 >
                     <FaAlignRight />
                 </button>
-           
             </div>
             <div
                 ref={editorRef}

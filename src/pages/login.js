@@ -88,7 +88,7 @@ const Login = () => {
                 {/* Left: Image */}
                 <div className="w-1/2 h-screen hidden lg:block">
                     <img
-                        src="https://placehold.co/800x/667fff/ffffff.png?text=CMS+OKOCE.net&font=Montserrat"
+                        src="https://placehold.co/800x/B0BEC5/ffffff.png?text=CMS+Web+Desa+Nuniali&font=Montserrat"
                         alt="Placeholder Image"
                         className="object-cover w-full h-full"
                     />

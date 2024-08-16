@@ -6,7 +6,7 @@ import Loading from '../../../components/Loading';
 import ConfirmationModal from '../../../components/ConfirmationModal';
 import RichTextEditor from '../../../components/RichTextEditor';
 
-const CreateAgenda = () => {
+const CreateLembaga = () => {
     const navigate = useNavigate();
     const { token } = useContext(AuthContext);
     const modalShowRef = useRef(false);
@@ -16,20 +16,14 @@ const CreateAgenda = () => {
     const loadingRef = useRef(false);
 
     const [formData, setFormData] = useState({
-        title: '',
-        author: '',
-        date: '',
-        location: '',
-        time: '',
+        name: '',
+        contact: '',
         image: null,
     });
 
     const [formErrors, setFormErrors] = useState({
-        title: '',
-        author: '',
-        date: '',
-        location: '',
-        time: '',
+        name: '',
+        contact: '',
         image: '',
     });
 
@@ -67,40 +61,25 @@ const CreateAgenda = () => {
     const validateForm = () => {
         let valid = true;
         const errors = {
-            title: '',
-            author: '',
-            date: '',
-            location: '',
-            time: '',
+            name: '',
+            contact: '',
             image: '',
         };
 
-        if (!formData.title.trim()) {
-            errors.title = 'Judul harus diisi';
+        if (!formData.name.trim()) {
+            errors.name = 'Nama lembaga harus diisi';
             valid = false;
         }
-        if (!formData.author.trim()) {
-            errors.author = 'Penulis harus diisi';
-            valid = false;
-        }
-        if (!formData.date.trim()) {
-            errors.date = 'Tanggal harus diisi';
-            valid = false;
-        }
-        if (!formData.location.trim()) {
-            errors.location = 'Lokasi harus diisi';
-            valid = false;
-        }
-        if (!formData.time.trim()) {
-            errors.time = 'Waktu harus diisi';
+        if (!formData.contact.trim()) {
+            errors.contact = 'Kontak lembaga harus diisi';
             valid = false;
         }
         if (!formData.image) {
-            errors.image = 'Gambar harus diunggah';
+            errors.image = 'Gambar lembaga harus diunggah';
             valid = false;
         }
         if (!bodyRef.current.trim()) {
-            bodyErrorRef.current = 'Isi harus diisi'; // Set error message for body
+            bodyErrorRef.current = 'Deskripsi lembaga harus diisi'; // Set error message for body
             valid = false;
         }
 
@@ -119,28 +98,25 @@ const CreateAgenda = () => {
                 loadingRef.current = true;
                 const formDataToSend = new FormData();
                 formDataToSend.append('file', formData.image);
-                formDataToSend.append('title', formData.title);
-                formDataToSend.append('author', formData.author);
-                formDataToSend.append('date', formData.date);
-                formDataToSend.append('location', formData.location);
-                formDataToSend.append('time', formData.time);
-                formDataToSend.append('body', bodyRef.current); // Use useRef value
+                formDataToSend.append('name', formData.name);
+                formDataToSend.append('contact', formData.contact);
+                formDataToSend.append('description', bodyRef.current); // Use useRef value
 
-                await axios.post('http://localhost:3000/agendas', formDataToSend, {
+                await axios.post('http://localhost:3000/lembagas', formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`
                     }
                 });
 
-                navigate('/admin/agenda');
+                navigate('/admin/lembaga');
             } catch (error) {
-                console.error('Error creating agenda:', error);
+                console.error('Error creating lembaga:', error);
                 loadingRef.current = false;
             }
         };
         modalTitleRef.current = 'Konfirmasi';
-        modalMessageRef.current = 'Apakah Anda yakin ingin membuat agenda ini?';
+        modalMessageRef.current = 'Apakah Anda yakin ingin membuat lembaga ini?';
         modalShowRef.current = true;
     };
 
@@ -148,81 +124,36 @@ const CreateAgenda = () => {
         <>
             {loadingRef.current && <Loading />}
             <div className="container mx-auto py-10 mt-32">
-                <h1 className="text-4xl font-bold mb-8 text-center">Create New Agenda</h1>
+                <h1 className="text-4xl font-bold mb-8 text-center">Buat Lembaga Baru</h1>
                 <form onSubmit={onSubmit} className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
                     <div className="mb-6">
-                        <label htmlFor="title" className="block text-lg font-medium text-gray-700 mb-2">
-                            Judul
+                        <label htmlFor="name" className="block text-lg font-medium text-gray-700 mb-2">
+                            Nama Lembaga
                         </label>
                         <input
                             type="text"
-                            id="title"
-                            name="title"
-                            value={formData.title}
+                            id="name"
+                            name="name"
+                            value={formData.name}
                             onChange={handleInputChange}
-                            className={`mt-2 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${formErrors.title ? 'border-red-500' : ''}`}
+                            className={`mt-2 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${formErrors.name ? 'border-red-500' : ''}`}
                         />
-                        {formErrors.title && <p className="text-red-500 text-sm mt-1">{formErrors.title}</p>}
+                        {formErrors.name && <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>}
                     </div>
 
                     <div className="mb-6">
-                        <label htmlFor="author" className="block text-lg font-medium text-gray-700 mb-2">
-                            Penulis
+                        <label htmlFor="contact" className="block text-lg font-medium text-gray-700 mb-2">
+                            Kontak
                         </label>
                         <input
                             type="text"
-                            id="author"
-                            name="author"
-                            value={formData.author}
+                            id="contact"
+                            name="contact"
+                            value={formData.contact}
                             onChange={handleInputChange}
-                            className={`mt-2 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${formErrors.author ? 'border-red-500' : ''}`}
+                            className={`mt-2 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${formErrors.contact ? 'border-red-500' : ''}`}
                         />
-                        {formErrors.author && <p className="text-red-500 text-sm mt-1">{formErrors.author}</p>}
-                    </div>
-
-                    <div className="mb-6">
-                        <label htmlFor="date" className="block text-lg font-medium text-gray-700 mb-2">
-                            Tanggal
-                        </label>
-                        <input
-                            type="date"
-                            id="date"
-                            name="date"
-                            value={formData.date}
-                            onChange={handleInputChange}
-                            className={`mt-2 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${formErrors.date ? 'border-red-500' : ''}`}
-                        />
-                        {formErrors.date && <p className="text-red-500 text-sm mt-1">{formErrors.date}</p>}
-                    </div>
-
-                    <div className="mb-6">
-                        <label htmlFor="location" className="block text-lg font-medium text-gray-700 mb-2">
-                            Lokasi
-                        </label>
-                        <input
-                            type="text"
-                            id="location"
-                            name="location"
-                            value={formData.location}
-                            onChange={handleInputChange}
-                            className={`mt-2 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${formErrors.location ? 'border-red-500' : ''}`}
-                        />
-                        {formErrors.location && <p className="text-red-500 text-sm mt-1">{formErrors.location}</p>}
-                    </div>
-
-                    <div className="mb-6">
-                        <label htmlFor="time" className="block text-lg font-medium text-gray-700 mb-2">
-                            Waktu
-                        </label>
-                        <input
-                            type="time"
-                            id="time"
-                            name="time"
-                            value={formData.time}
-                            onChange={handleInputChange}
-                            className={`mt-2 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${formErrors.time ? 'border-red-500' : ''}`}
-                        />
-                        {formErrors.time && <p className="text-red-500 text-sm mt-1">{formErrors.time}</p>}
+                        {formErrors.contact && <p className="text-red-500 text-sm mt-1">{formErrors.contact}</p>}
                     </div>
 
                     <div className="mb-6">
@@ -241,8 +172,8 @@ const CreateAgenda = () => {
                     </div>
 
                     <div className="mb-6">
-                        <label htmlFor="body" className="block text-lg font-medium text-gray-700 mb-2">
-                            Isi
+                        <label htmlFor="description" className="block text-lg font-medium text-gray-700 mb-2">
+                            Deskripsi
                         </label>
                         <RichTextEditor
                             value={bodyRef.current}
@@ -277,4 +208,4 @@ const CreateAgenda = () => {
     );
 };
 
-export default CreateAgenda;
+export default CreateLembaga;
