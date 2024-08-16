@@ -28,7 +28,7 @@ const PembangunanTable = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3000/pembangunan', { params: query });
+            const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/pembangunan', { params: query });
             setData(response.data.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -41,7 +41,7 @@ const PembangunanTable = () => {
     const handleDelete = async () => {
         setLoading(true);
         try {
-            await axios.delete(`http://localhost:3000/pembangunan/${toBeDeletedId}`, {
+            await axios.delete(`https://nuniali-51afdf69a4d2.herokuapp.com/pembangunan/${toBeDeletedId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -104,7 +104,7 @@ const PembangunanTable = () => {
     };
 
     const handleFotoUpdate = async () => {
-        const response = await axios.get('http://localhost:3000/pembangunan', { params: query });
+        const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/pembangunan', { params: query });
         setData(response.data.data);
     };
 

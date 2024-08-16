@@ -41,7 +41,7 @@ const UpdateAgenda = () => {
         // Fetch existing data when the component mounts
         const fetchAgenda = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/agendas/${id}`, {
+                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/agendas/${id}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const data = response.data;
@@ -149,7 +149,7 @@ const UpdateAgenda = () => {
                 formDataToSend.append('time', formData.time);
                 formDataToSend.append('body', bodyRef.current); // Use useRef value
 
-                await axios.put(`http://localhost:3000/agendas/${id}`, formDataToSend, {
+                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/agendas/${id}`, formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`

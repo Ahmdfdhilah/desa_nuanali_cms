@@ -24,7 +24,7 @@ const VideoGallery = () => {
   const fetchVideos = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:3000/videos', { params: query });
+      const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/videos', { params: query });
       setVideos(response.data.data);
     } catch (error) {
       console.error('Error fetching videos:', error);
@@ -37,7 +37,7 @@ const VideoGallery = () => {
   const handleDelete = async () => {
     setLoading(true);
     try {
-      await axios.delete(`http://localhost:3000/videos/${toBeDeletedId}`, {
+      await axios.delete(`https://nuniali-51afdf69a4d2.herokuapp.com/videos/${toBeDeletedId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setToast({ show: true, type: 'success', message: 'Video berhasil dihapus!' });
@@ -75,7 +75,7 @@ const VideoGallery = () => {
 
     setLoading(true);
     try {
-      await axios.post('http://localhost:3000/videos', { link: embedLink, isVertical }, {
+      await axios.post('https://nuniali-51afdf69a4d2.herokuapp.com/videos', { link: embedLink, isVertical }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setToast({ show: true, type: 'success', message: 'Video berhasil ditambahkan!' });

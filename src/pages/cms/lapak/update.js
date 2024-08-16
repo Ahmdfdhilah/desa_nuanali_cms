@@ -43,7 +43,7 @@ const UpdateLapak = () => {
     useEffect(() => {
         const fetchLapakData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/lapak/${id}`, {
+                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/lapak/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -148,7 +148,7 @@ const UpdateLapak = () => {
                 formDataToSend.append('contactPerson', formData.contactPerson);
                 formDataToSend.append('description', bodyRef.current); 
 
-                await axios.put(`http://localhost:3000/lapak/${id}`, formDataToSend, {
+                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/lapak/${id}`, formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`

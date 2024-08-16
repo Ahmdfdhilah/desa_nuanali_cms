@@ -126,7 +126,7 @@ const CreateAgenda = () => {
                 formDataToSend.append('time', formData.time);
                 formDataToSend.append('body', bodyRef.current); // Use useRef value
 
-                await axios.post('http://localhost:3000/agendas', formDataToSend, {
+                await axios.post('https://nuniali-51afdf69a4d2.herokuapp.com/agendas', formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`

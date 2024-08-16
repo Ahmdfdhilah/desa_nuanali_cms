@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     const validateToken = async () => {
       try {
         if (accessToken) {
-          const response = await axios.get('http://localhost:3000/auth/validate-token', {
+          const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/auth/validate-token', {
             headers: {
               Authorization: `Bearer ${accessToken}`
             }

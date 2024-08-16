@@ -35,7 +35,7 @@ const UpdateStruktur = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:3000/strukturs/${id}`, {
+                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/strukturs/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -125,7 +125,7 @@ const UpdateStruktur = () => {
                 formDataToSend.append('alamat', formData.alamat);
                 formDataToSend.append('jabatan', formData.jabatan);
 
-                await axios.put(`http://localhost:3000/strukturs/${id}`, formDataToSend, {
+                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/strukturs/${id}`, formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`
@@ -199,7 +199,7 @@ const UpdateStruktur = () => {
                             Foto
                         </label>
                         {formData.currentFile && (
-                            <img src={`http://localhost:3000${formData.currentFile}`} alt="Current" className="mb-4 max-w-xs rounded-full" width={100} />
+                            <img src={`https://nuniali-51afdf69a4d2.herokuapp.com${formData.currentFile}`} alt="Current" className="mb-4 max-w-xs rounded-full" width={100} />
                         )}
                         <input
                             type="file"

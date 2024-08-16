@@ -27,7 +27,7 @@ const LembagaTable = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3000/lembagas', { params: query });
+            const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/lembagas', { params: query });
             setData(response.data.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -40,7 +40,7 @@ const LembagaTable = () => {
     const handleDelete = async () => {
         setLoading(true);
         try {
-            await axios.delete(`http://localhost:3000/lembagas/${toBeDeletedId}`, {
+            await axios.delete(`https://nuniali-51afdf69a4d2.herokuapp.com/lembagas/${toBeDeletedId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -164,7 +164,7 @@ const LembagaTable = () => {
                                     <td className="py-3 px-4">
                                         {item.image ? (
                                             <img
-                                                src={`http://localhost:3000${item.image}`}
+                                                src={`https://nuniali-51afdf69a4d2.herokuapp.com${item.image}`}
                                                 alt={item.name}
                                                 className="h-10 w-10 rounded-full object-cover"
                                             />

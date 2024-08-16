@@ -5,11 +5,14 @@ import './index.css';
 import Login from './pages/login';
 import { AuthProvider } from './AuthProvider';
 import AdminPrivateRoute from './PrivateRoute';
-import { AgendaTable, BeritaTable, CreateAgenda, CreateBerita, CreateDanaDesa, CreateLapak, CreateLembaga, CreatePembangunan, CreatePrestasi, CreateStruktur, CreateWilayah, CreateWisata, DanaDesaTable, LapakTable, LembagaTable, PembangunanTable, PrestasiTable, StrukturTable, UpdateAgenda, UpdateBerita, UpdateDanaDesa, UpdateLapak, UpdateLembaga, UpdatePembangunan, UpdatePrestasi, UpdateStruktur, UpdateWilayah, UpdateWisata, WilayahTable, WisataTable } from './pages/cms';
+import { AgendaTable, BeritaTable, CreateAgenda, CreateBerita, CreateDanaDesa, CreateEducation, CreateLapak, CreateLembaga, CreatePekerjaan, CreatePembangunan, CreatePrestasi, CreateReligion, CreateSekolah, CreateStatus, CreateStruktur, CreateUsia, CreateWilayah, CreateWisata, DanaDesaTable, EducationTable, GenderTable, LapakTable, LembagaTable, PekerjaanTable, PembangunanTable, PrestasiTable, ReligionTable, SekolahTable, StatusTable, StrukturTable, UpdateAgenda, UpdateBerita, UpdateDanaDesa, UpdateEducation, UpdateLapak, UpdateLembaga, UpdatePekerjaan, UpdatePembangunan, UpdatePrestasi, UpdateReligion, UpdateSekolah, UpdateStatus, UpdateStruktur, UpdateUsia, UpdateWilayah, UpdateWisata, UsiaTable, WilayahTable, WisataTable } from './pages/cms';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import PhotoGallery from './pages/cms/photo';
 import VideoGallery from './pages/cms/videos';
+import CreateGender from './pages/cms/gender/create';
+import UpdateGender from './pages/cms/gender/update';
+import HomeCMS from './pages';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -18,6 +21,7 @@ root.render(
       <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<AdminPrivateRoute Component={HomeCMS} />} />
         <Route path="/admin/struktur" element={<AdminPrivateRoute Component={StrukturTable} />} />
         <Route path="/admin/struktur/create" element={<AdminPrivateRoute Component={CreateStruktur} />} />
         <Route path="/admin/struktur/update/:id" element={<AdminPrivateRoute Component={UpdateStruktur} />} />
@@ -48,6 +52,27 @@ root.render(
         <Route path="/admin/dana-desa" element={<AdminPrivateRoute Component={DanaDesaTable} />} />
         <Route path="/admin/dana-desa/create" element={<AdminPrivateRoute Component={CreateDanaDesa} />} />
         <Route path="/admin/dana-desa/update/:id" element={<AdminPrivateRoute Component={UpdateDanaDesa} />} />
+        <Route path="/admin/gender" element={<AdminPrivateRoute Component={GenderTable} />} />
+        <Route path="/admin/gender/create" element={<AdminPrivateRoute Component={CreateGender} />} />
+        <Route path="/admin/gender/update/:id" element={<AdminPrivateRoute Component={UpdateGender} />} />
+        <Route path="/admin/education" element={<AdminPrivateRoute Component={EducationTable} />} />
+        <Route path="/admin/education/create" element={<AdminPrivateRoute Component={CreateEducation} />} />
+        <Route path="/admin/education/update/:id" element={<AdminPrivateRoute Component={UpdateEducation} />} />
+        <Route path="/admin/sekolah" element={<AdminPrivateRoute Component={SekolahTable} />} />
+        <Route path="/admin/sekolah/create" element={<AdminPrivateRoute Component={CreateSekolah} />} />
+        <Route path="/admin/sekolah/update/:id" element={<AdminPrivateRoute Component={UpdateSekolah} />} />
+        <Route path="/admin/religion" element={<AdminPrivateRoute Component={ReligionTable} />} />
+        <Route path="/admin/religion/create" element={<AdminPrivateRoute Component={CreateReligion} />} />
+        <Route path="/admin/religion/update/:id" element={<AdminPrivateRoute Component={UpdateReligion} />} />
+        <Route path="/admin/usia" element={<AdminPrivateRoute Component={UsiaTable} />} />
+        <Route path="/admin/usia/create" element={<AdminPrivateRoute Component={CreateUsia} />} />
+        <Route path="/admin/usia/update/:id" element={<AdminPrivateRoute Component={UpdateUsia} />} />
+        <Route path="/admin/status" element={<AdminPrivateRoute Component={StatusTable} />} />
+        <Route path="/admin/status/create" element={<AdminPrivateRoute Component={CreateStatus} />} />
+        <Route path="/admin/status/update/:id" element={<AdminPrivateRoute Component={UpdateStatus} />} />
+        <Route path="/admin/pekerjaan" element={<AdminPrivateRoute Component={PekerjaanTable} />} />
+        <Route path="/admin/pekerjaan/create" element={<AdminPrivateRoute Component={CreatePekerjaan} />} />
+        <Route path="/admin/pekerjaan/update/:id" element={<AdminPrivateRoute Component={UpdatePekerjaan} />} />
         <Route path="/admin/photo" element={<AdminPrivateRoute Component={PhotoGallery} />} />
         <Route path="/admin/videos" element={<AdminPrivateRoute Component={VideoGallery} />} />
       </Routes>

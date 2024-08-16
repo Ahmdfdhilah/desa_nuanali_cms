@@ -27,7 +27,7 @@ const PrestasiTable = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3000/prestasi', { params: query });
+            const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/prestasi', { params: query });
             setData(response.data.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -40,7 +40,7 @@ const PrestasiTable = () => {
     const handleDelete = async () => {
         setLoading(true);
         try {
-            await axios.delete(`http://localhost:3000/prestasi/${toBeDeletedId}`, {
+            await axios.delete(`https://nuniali-51afdf69a4d2.herokuapp.com/prestasi/${toBeDeletedId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -162,7 +162,7 @@ const PrestasiTable = () => {
                                     <td className='py-3 px-4'>{getNumber(index)}</td>
                                     <td className="py-3 px-4">
                                         <img
-                                            src={`http://localhost:3000${item.foto}`}
+                                            src={`https://nuniali-51afdf69a4d2.herokuapp.com${item.foto}`}
                                             alt={item.title}
                                             className="h-10 w-10 rounded-full object-cover"
                                         />

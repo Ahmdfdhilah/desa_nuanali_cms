@@ -17,7 +17,7 @@ const Login = () => {
             const token = localStorage.getItem('token');
             if (token) {
                 try {
-                    await axios.get('http://localhost:3000/auth/validate-token', {
+                    await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/auth/validate-token', {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }
@@ -51,7 +51,7 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:3000/auth/login', JSON.stringify({
+            const response = await axios.post('https://nuniali-51afdf69a4d2.herokuapp.com/auth/login', JSON.stringify({
                 email,
                 password
             }), {

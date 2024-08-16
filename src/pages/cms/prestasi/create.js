@@ -80,7 +80,7 @@ const CreatePrestasi = () => {
                 formDataToSend.append('file', formData.file);
                 formDataToSend.append('title', formData.title);
 
-                await axios.post('http://localhost:3000/prestasi', formDataToSend, {
+                await axios.post('https://nuniali-51afdf69a4d2.herokuapp.com/prestasi', formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`

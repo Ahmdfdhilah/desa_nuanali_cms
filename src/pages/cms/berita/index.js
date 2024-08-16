@@ -27,7 +27,7 @@ const BeritaTable = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3000/beritas', { params: query });
+            const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/beritas', { params: query });
             setData(response.data.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -40,7 +40,7 @@ const BeritaTable = () => {
     const handleDelete = async () => {
         setLoading(true);
         try {
-            await axios.delete(`http://localhost:3000/beritas/${toBeDeletedId}`, {
+            await axios.delete(`https://nuniali-51afdf69a4d2.herokuapp.com/beritas/${toBeDeletedId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -165,7 +165,7 @@ const BeritaTable = () => {
                                     <td className='py-3 px-4'>{getNumber(index)}</td>
                                     <td className="py-3 px-4">
                                         <img
-                                            src={`http://localhost:3000${item.image}`}
+                                            src={`https://nuniali-51afdf69a4d2.herokuapp.com${item.image}`}
                                             alt={item.title}
                                             className="h-10 w-10 rounded-full object-cover"
                                         />

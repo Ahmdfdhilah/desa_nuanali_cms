@@ -34,7 +34,7 @@ const UpdateDanaDesa = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:3000/dana-desas/${id}`, {
+                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/dana-desas/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -101,7 +101,7 @@ const UpdateDanaDesa = () => {
             try {
                 setLoading(true);
 
-                await axios.put(`http://localhost:3000/dana-desas/${id}`, formData, {
+                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/dana-desas/${id}`, formData, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

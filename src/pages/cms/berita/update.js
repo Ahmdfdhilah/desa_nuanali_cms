@@ -41,7 +41,7 @@ const UpdateBerita = () => {
         // Fetch the existing berita data when the component mounts
         const fetchBerita = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/beritas/${id}`, {
+                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/beritas/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -156,7 +156,7 @@ const UpdateBerita = () => {
                 formDataToSend.append('excerpt', formData.excerpt);
                 formDataToSend.append('body', bodyRef.current); // Use useRef value
 
-                await axios.put(`http://localhost:3000/beritas/${id}`, formDataToSend, {
+                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/beritas/${id}`, formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`

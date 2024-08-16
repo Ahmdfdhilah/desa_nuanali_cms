@@ -35,7 +35,7 @@ const UpdateLembaga = () => {
     useEffect(() => {
         const fetchLembaga = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/lembagas/${id}`, {
+                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/lembagas/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -124,7 +124,7 @@ const UpdateLembaga = () => {
                 formDataToSend.append('contact', formData.contact);
                 formDataToSend.append('description', bodyRef.current); // Use useRef value
 
-                await axios.put(`http://localhost:3000/lembagas/${id}`, formDataToSend, {
+                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/lembagas/${id}`, formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`

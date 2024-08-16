@@ -15,7 +15,7 @@ const FotoManager = ({ id, gambarUrls, onUpdate, name }) => {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`http://localhost:3000/${name}/${id}/foto`, {
+            await axios.delete(`https://nuniali-51afdf69a4d2.herokuapp.com/${name}/${id}/foto`, {
                 params: { fotoUrl: toBeDeletedUrl },
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -36,7 +36,7 @@ const FotoManager = ({ id, gambarUrls, onUpdate, name }) => {
                 {gambarUrls.map((url, index) => (
                     <div key={index} className="relative inline-block m-2">
                         <img
-                            src={`http://localhost:3000${url}`}
+                            src={`https://nuniali-51afdf69a4d2.herokuapp.com${url}`}
                             alt={`gambar-${index}`}
                             className="h-24 w-24 rounded-full object-cover cursor-pointer"
                             onClick={() => handleDeleteConfirmation(url)}

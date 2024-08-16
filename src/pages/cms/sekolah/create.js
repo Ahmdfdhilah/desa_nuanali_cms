@@ -1,13 +1,12 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../AuthProvider';
 import Loading from '../../../components/Loading';
 import ConfirmationModal from '../../../components/ConfirmationModal';
 
-const UpdateEducation = () => {
+const CreateSekolah = () => {
     const navigate = useNavigate();
-    const { id } = useParams(); // Get ID from URL
     const { token } = useContext(AuthContext);
     const [modalShow, setModalShow] = useState(false);
     const [modalTitle, setModalTitle] = useState('');
@@ -17,40 +16,20 @@ const UpdateEducation = () => {
 
     const [formData, setFormData] = useState({
         name: '',
-        total: '',
+        total: ''
     });
 
     const [formErrors, setFormErrors] = useState({
         name: '',
-        total: '',
+        total: ''
     });
-
-    useEffect(() => {
-        // Fetch existing data based on ID
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/educations/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
-                setFormData(response.data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchData();
-    }, [id, token]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
+        setFormData((prevData) => ({
+            ...prevData,
             [name]: value,
-        });
+        }));
         setFormErrors({
             ...formErrors,
             [name]: '',
@@ -61,15 +40,16 @@ const UpdateEducation = () => {
         let valid = true;
         const errors = {
             name: '',
-            total: '',
+            total: ''
         };
 
         if (!formData.name.trim()) {
             errors.name = 'Nama harus diisi';
             valid = false;
         }
-        if (!formData.total.trim()) {
-            errors.total = 'Total harus diisi';
+
+        if (!formData.total.trim() || isNaN(formData.total)) {
+            errors.total = 'Total harus diisi dan berupa angka';
             valid = false;
         }
 
@@ -87,20 +67,20 @@ const UpdateEducation = () => {
             try {
                 setLoading(true);
 
-                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/educations/${id}`, formData, {
+                await axios.post('https://nuniali-51afdf69a4d2.herokuapp.com/sekolah', formData, {
                     headers: {
-                        Authorization: `Bearer ${token}`
-                    }
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
 
-                navigate('/admin/education');
+                navigate('/admin/sekolah');
             } catch (error) {
-                console.error('Error updating data:', error);
+                console.error('Error creating sekolah:', error);
                 setLoading(false);
             }
         });
         setModalTitle('Konfirmasi');
-        setModalMessage('Apakah Anda yakin ingin memperbarui data pendidikan ini?');
+        setModalMessage('Apakah Anda yakin ingin membuat sekolah ini?');
         setModalShow(true);
     };
 
@@ -108,11 +88,11 @@ const UpdateEducation = () => {
         <>
             {loading && <Loading />}
             <div className="container mx-auto py-10 mt-32">
-                <h1 className="text-4xl font-bold mb-8 text-center">Update Pendidikan</h1>
+                <h1 className="text-4xl font-bold mb-8 text-center">Buat Sekolah Baru</h1>
                 <form onSubmit={onSubmit} className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
                     <div className="mb-6">
                         <label htmlFor="name" className="block text-lg font-medium text-gray-700 mb-2">
-                            Nama Pendidikan
+                            Nama
                         </label>
                         <select
                             id="name"
@@ -160,11 +140,16 @@ const UpdateEducation = () => {
                 show={modalShow}
                 title={modalTitle}
                 message={modalMessage}
-                onClose={() => setModalShow(false)}
-                onConfirm={modalAction}
+                onConfirm={() => {
+                    if (modalAction) {
+                        modalAction();
+                    }
+                    setModalShow(false);
+                }}
+                onCancel={() => setModalShow(false)}
             />
         </>
     );
 };
 
-export default UpdateEducation;
+export default CreateSekolah;

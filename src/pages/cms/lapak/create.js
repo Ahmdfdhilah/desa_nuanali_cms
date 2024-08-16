@@ -118,7 +118,7 @@ const CreateLapak = () => {
                 formDataToSend.append('contactPerson', formData.contactPerson);
                 formDataToSend.append('description', bodyRef.current); // Use useRef value
 
-                await axios.post('http://localhost:3000/lapak', formDataToSend, {
+                await axios.post('https://nuniali-51afdf69a4d2.herokuapp.com/lapak', formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`

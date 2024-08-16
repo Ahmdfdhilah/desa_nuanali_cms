@@ -33,7 +33,7 @@ const UpdateWisata = () => {
     useEffect(() => {
         const fetchWisata = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/wisata/${id}`, {
+                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/wisata/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -130,7 +130,7 @@ const UpdateWisata = () => {
                     formDataToSend.append('files', file); // Append each file
                 });
 
-                await axios.put(`http://localhost:3000/wisata/${id}`, formDataToSend, {
+                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/wisata/${id}`, formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`,

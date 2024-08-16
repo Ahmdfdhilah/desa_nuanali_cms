@@ -96,7 +96,7 @@ const CreateWilayah = () => {
             try {
                 setLoading(true);
 
-                await axios.post('http://localhost:3000/wilayahs', formData, {
+                await axios.post('https://nuniali-51afdf69a4d2.herokuapp.com/wilayahs', formData, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

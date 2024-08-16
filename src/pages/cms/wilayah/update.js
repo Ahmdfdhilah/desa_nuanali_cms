@@ -38,7 +38,7 @@ const UpdateWilayah = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:3000/wilayahs/${id}`, {
+                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/wilayahs/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -115,7 +115,7 @@ const UpdateWilayah = () => {
             try {
                 setLoading(true);
 
-                await axios.put(`http://localhost:3000/wilayahs/${id}`, formData, {
+                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/wilayahs/${id}`, formData, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

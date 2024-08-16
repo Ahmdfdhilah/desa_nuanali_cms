@@ -69,7 +69,7 @@ export default function Navbar() {
             </div>
             <nav className={`navbar ${isFixedNavbar ? "fixed top-0 left-0 right-0 bg-white shadow-md" : "bg-white"} border-b border-primary`}>
                 <div className="container mx-auto flex items-center justify-between p-4">
-                    <a href="http://localhost:3001/" className="flex items-center">
+                    <a href="https://desa-nuanali.vercel.app/" className="flex items-center">
                         <img src={logo} alt="logo desa" className="w-10 h-10" />
                         <div className="ml-2">
                             <h5 className="text-primary font-semibold">Desa Nuniali</h5>
@@ -131,8 +131,14 @@ export default function Navbar() {
                             <button className="text-tertiary hover:text-primary">Demografis</button>
                             {openDropdown.demografis && (
                                 <div className="absolute bg-white border border-gray-200 rounded-lg shadow-lg">
-                                    <Link to="#" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Penduduk</Link>
-                                    <Link to="#" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Wilayah</Link>
+                                    <Link to="/admin/gender" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Penduduk Jenis-Kelamin</Link>
+                                    <Link to="/admin/sekolah" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Penduduk Jumlah Sekolah</Link>
+                                    <Link to="/admin/education" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Penduduk Pendidikan</Link>
+                                    <Link to="/admin/religion" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Penduduk Agama</Link>
+                                    <Link to="/admin/pekerjaan" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Penduduk Pekerjaan</Link>
+                                    <Link to="/admin/usia" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Penduduk Usia</Link>
+                                    <Link to="/admin/status" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Penduduk Status</Link>
+                                    <Link to="/admin/wilayah" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Wilayah</Link>
                                 </div>
                             )}
                         </div>
@@ -158,7 +164,7 @@ export default function Navbar() {
                             {openDropdown.publikasi && (
                                 <div className="absolute bg-white border border-gray-200 rounded-lg shadow-lg">
                                     <Link to="/admin/pembangunan" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Pembangunan Desa</Link>
-                                    <Link to="#" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Dana Desa</Link>
+                                    <Link to="/admin/dana-desa" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Dana Desa</Link>
                                 </div>
                             )}
                         </div>

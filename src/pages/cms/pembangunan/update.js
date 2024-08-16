@@ -41,7 +41,7 @@ const UpdatePembangunan = () => {
     useEffect(() => {
         const fetchPembangunan = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/pembangunan/${id}`, {
+                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/pembangunan/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -157,7 +157,7 @@ const UpdatePembangunan = () => {
                 formDataToSend.append('tahun', formData.tahun);
                 formDataToSend.append('progres', formData.progres);
 
-                await axios.put(`http://localhost:3000/pembangunan/${id}`, formDataToSend, {
+                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/pembangunan/${id}`, formDataToSend, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         Authorization: `Bearer ${token}`

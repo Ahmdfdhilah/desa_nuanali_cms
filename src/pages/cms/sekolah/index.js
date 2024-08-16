@@ -6,7 +6,7 @@ import Toast from '../../../components/Toast';
 import Loading from '../../../components/Loading';
 import ConfirmationModal from '../../../components/ConfirmationModal';
 
-const DanaDesaTable = () => {
+const SekolahTable = () => {
     const [data, setData] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
     const [toast, setToast] = useState({ show: false, type: '', message: '' });
@@ -27,8 +27,8 @@ const DanaDesaTable = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/dana-desas', { params: query });
-            setData(response.data.data);
+            const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/sekolah', { params: query });
+            setData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
             setToast({ show: true, type: 'error', message: 'Gagal mengambil data.' });
@@ -40,7 +40,7 @@ const DanaDesaTable = () => {
     const handleDelete = async () => {
         setLoading(true);
         try {
-            await axios.delete(`https://nuniali-51afdf69a4d2.herokuapp.com/dana-desas/${toBeDeletedId}`, {
+            await axios.delete(`https://nuniali-51afdf69a4d2.herokuapp.com/sekolah/${toBeDeletedId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -75,11 +75,11 @@ const DanaDesaTable = () => {
     };
 
     const handleCreateNew = () => {
-        navigate('/admin/dana-desa/create');
+        navigate('/admin/sekolah/create');
     };
 
     const handleEdit = (id) => {
-        navigate(`/admin/dana-desa/update/${id}`);
+        navigate(`/admin/sekolah/update/${id}`);
     };
 
     const handleSearchChange = (event) => {
@@ -107,7 +107,7 @@ const DanaDesaTable = () => {
             {loading && <Loading />}
             <div className="overflow-x-auto my-32 px-6">
                 <div className="flex justify-between mb-6">
-                    <h2 className="text-2xl font-semibold text-gray-800">Dana Desa</h2>
+                    <h2 className="text-2xl font-semibold text-gray-800">Jumlah Sekolah di Desa</h2>
                     <button
                         onClick={handleCreateNew}
                         className="px-4 py-2 bg-indigo-500 text-white rounded hover:bg-indigo-600 focus:outline-none"
@@ -129,10 +129,8 @@ const DanaDesaTable = () => {
                         className="px-3 py-2 border border-gray-300 rounded-md mr-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     >
                         <option value="">Urutkan Berdasarkan...</option>
-                        <option value="nama">Nama</option>
-                        <option value="anggaran">Anggaran</option>
-                        <option value="realisasi">Realisasi</option>
-                        <option value="tipe">Tipe</option>
+                        <option value="name">Nama</option>
+                        <option value="total">Total</option>
                     </select>
                     <select
                         value={query.order || ''}
@@ -149,9 +147,7 @@ const DanaDesaTable = () => {
                         <tr>
                             <th className="text-left py-3 px-4 uppercase font-semibold text-sm">No</th>
                             <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Nama</th>
-                            <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Anggaran</th>
-                            <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Realisasi</th>
-                            <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Tipe</th>
+                            <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Total</th>
                             <th className="text-left py-3 px-4 uppercase font-semibold text-sm">Aksi</th>
                         </tr>
                     </thead>
@@ -163,10 +159,8 @@ const DanaDesaTable = () => {
                                     onClick={() => handleRowClick(item)}
                                 >
                                     <td className='py-3 px-4'>{getNumber(index)}</td>
-                                    <td className="py-3 px-4">{item.nama}</td>
-                                    <td className="py-3 px-4">{item.anggaran}</td>
-                                    <td className="py-3 px-4">{item.realisasi}</td>
-                                    <td className="py-3 px-4">{item.tipe}</td>
+                                    <td className="py-3 px-4">{item.name}</td>
+                                    <td className="py-3 px-4">{item.total}</td>
                                     <td className="py-3 px-4">
                                         <button
                                             onClick={() => handleDeleteConfirmation(item.id)}
@@ -184,14 +178,12 @@ const DanaDesaTable = () => {
                                 </tr>
                                 {selectedItem && selectedItem.id === item.id && (
                                     <tr className="bg-gray-200">
-                                        <td colSpan="6" className="py-4 px-6">
+                                        <td colSpan="4" className="py-4 px-6">
                                             <div className="flex justify-between">
                                                 <div>
                                                     <h3 className="text-lg font-semibold mb-2">Detail</h3>
-                                                    <p><span className="font-semibold">Nama:</span> {item.nama}</p>
-                                                    <p><span className="font-semibold">Anggaran:</span> {item.anggaran}</p>
-                                                    <p><span className="font-semibold">Realisasi:</span> {item.realisasi}</p>
-                                                    <p><span className="font-semibold">Tipe:</span> {item.tipe}</p>
+                                                    <p><span className="font-semibold">Nama:</span> {item.name}</p>
+                                                    <p><span className="font-semibold">Total:</span> {item.total}</p>
                                                 </div>
                                                 <button
                                                     onClick={handleCloseDetail}
@@ -217,11 +209,7 @@ const DanaDesaTable = () => {
                     </button>
                     <button
                         onClick={() => handlePageChange(query.page + 1)}
-                        className="px-4 py-2 bg-gray-200 text-gray-600 ml-2 rounded hover:bg-gray-300 focus
-
-
-
-:outline-none"
+                        className="px-4 py-2 bg-gray-200 text-gray-600 ml-2 rounded hover:bg-gray-300 focus:outline-none"
                     >
                         Selanjutnya
                     </button>
@@ -241,4 +229,4 @@ const DanaDesaTable = () => {
     );
 };
 
-export default DanaDesaTable;
+export default SekolahTable;

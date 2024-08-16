@@ -22,7 +22,7 @@ const PhotoGallery = () => {
     const fetchPhotos = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3000/photos', { params: query });
+            const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/photos', { params: query });
             setPhotos(response.data.data);
         } catch (error) {
             console.error('Error fetching photos:', error);
@@ -35,7 +35,7 @@ const PhotoGallery = () => {
     const handleDelete = async () => {
         setLoading(true);
         try {
-            await axios.delete(`http://localhost:3000/photos/${toBeDeletedId}`, {
+            await axios.delete(`https://nuniali-51afdf69a4d2.herokuapp.com/photos/${toBeDeletedId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setToast({ show: true, type: 'success', message: 'Photo deleted successfully!' });
@@ -72,7 +72,7 @@ const PhotoGallery = () => {
         newPhotos.forEach(photo => formData.append('files', photo));
 
         try {
-            await axios.post('http://localhost:3000/photos', formData, {
+            await axios.post('https://nuniali-51afdf69a4d2.herokuapp.com/photos', formData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setToast({ show: true, type: 'success', message: 'Photos uploaded successfully!' });
@@ -98,7 +98,7 @@ const PhotoGallery = () => {
                 {photos.map(photo => (
                     <div key={photo.id} className="bg-white rounded shadow-md p-4 flex flex-col justify-between">
                         <img
-                            src={`http://localhost:3000${photo.src}`}
+                            src={`https://nuniali-51afdf69a4d2.herokuapp.com${photo.src}`}
                             alt={photo.title}
                             className="rounded mb-2 object-cover w-full h-48"
                         />

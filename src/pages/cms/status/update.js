@@ -5,7 +5,7 @@ import { AuthContext } from '../../../AuthProvider';
 import Loading from '../../../components/Loading';
 import ConfirmationModal from '../../../components/ConfirmationModal';
 
-const UpdateEducation = () => {
+const UpdateStatus = () => {
     const navigate = useNavigate();
     const { id } = useParams(); // Get ID from URL
     const { token } = useContext(AuthContext);
@@ -17,12 +17,12 @@ const UpdateEducation = () => {
 
     const [formData, setFormData] = useState({
         name: '',
-        total: '',
+        total: ''
     });
 
     const [formErrors, setFormErrors] = useState({
         name: '',
-        total: '',
+        total: ''
     });
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const UpdateEducation = () => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/educations/${id}`, {
+                const response = await axios.get(`https://nuniali-51afdf69a4d2.herokuapp.com/statuses/${id}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -61,15 +61,16 @@ const UpdateEducation = () => {
         let valid = true;
         const errors = {
             name: '',
-            total: '',
+            total: ''
         };
 
         if (!formData.name.trim()) {
             errors.name = 'Nama harus diisi';
             valid = false;
         }
-        if (!formData.total.trim()) {
-            errors.total = 'Total harus diisi';
+
+        if (!formData.total.trim() || isNaN(formData.total)) {
+            errors.total = 'Total harus diisi dan berupa angka';
             valid = false;
         }
 
@@ -87,20 +88,20 @@ const UpdateEducation = () => {
             try {
                 setLoading(true);
 
-                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/educations/${id}`, formData, {
+                await axios.put(`https://nuniali-51afdf69a4d2.herokuapp.com/statuses/${id}`, formData, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
 
-                navigate('/admin/education');
+                navigate('/admin/status');
             } catch (error) {
-                console.error('Error updating data:', error);
+                console.error('Error updating status:', error);
                 setLoading(false);
             }
         });
         setModalTitle('Konfirmasi');
-        setModalMessage('Apakah Anda yakin ingin memperbarui data pendidikan ini?');
+        setModalMessage('Apakah Anda yakin ingin memperbarui data status ini?');
         setModalShow(true);
     };
 
@@ -108,11 +109,11 @@ const UpdateEducation = () => {
         <>
             {loading && <Loading />}
             <div className="container mx-auto py-10 mt-32">
-                <h1 className="text-4xl font-bold mb-8 text-center">Update Pendidikan</h1>
+                <h1 className="text-4xl font-bold mb-8 text-center">Update Status</h1>
                 <form onSubmit={onSubmit} className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
                     <div className="mb-6">
                         <label htmlFor="name" className="block text-lg font-medium text-gray-700 mb-2">
-                            Nama Pendidikan
+                            Nama Status
                         </label>
                         <select
                             id="name"
@@ -121,12 +122,10 @@ const UpdateEducation = () => {
                             onChange={handleInputChange}
                             className={`mt-2 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm ${formErrors.name ? 'border-red-500' : ''}`}
                         >
-                            <option value="">Pilih Nama</option>
-                            <option value="Paud">Paud</option>
-                            <option value="TK">TK</option>
-                            <option value="SD">SD</option>
-                            <option value="SMP">SMP</option>
-                            <option value="SMA">SMA</option>
+                            <option value="">Pilih Status</option>
+                            <option value="Menikah">Menikah</option>
+                            <option value="Bercerai">Bercerai</option>
+                            <option value="Belum Menikah">Belum Menikah</option>
                         </select>
                         {formErrors.name && <p className="text-red-500 text-sm mt-1">{formErrors.name}</p>}
                     </div>
@@ -160,11 +159,11 @@ const UpdateEducation = () => {
                 show={modalShow}
                 title={modalTitle}
                 message={modalMessage}
-                onClose={() => setModalShow(false)}
                 onConfirm={modalAction}
+                onClose={() => setModalShow(false)}
             />
         </>
     );
 };
 
-export default UpdateEducation;
+export default UpdateStatus;

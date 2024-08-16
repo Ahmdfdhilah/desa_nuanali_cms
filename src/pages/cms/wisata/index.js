@@ -28,7 +28,7 @@ const WisataTable = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3000/wisata', { params: query });
+            const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/wisata', { params: query });
             setData(response.data.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -41,7 +41,7 @@ const WisataTable = () => {
     const handleDelete = async () => {
         setLoading(true);
         try {
-            await axios.delete(`http://localhost:3000/wisata/${toBeDeletedId}`, {
+            await axios.delete(`https://nuniali-51afdf69a4d2.herokuapp.com/wisata/${toBeDeletedId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -104,7 +104,7 @@ const WisataTable = () => {
     };
     
     const handleFotoUpdate = async () => {
-        const response = await axios.get('http://localhost:3000/wisata', { params: query });
+        const response = await axios.get('https://nuniali-51afdf69a4d2.herokuapp.com/wisata', { params: query });
         setData(response.data.data);
     };
 
