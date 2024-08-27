@@ -82,7 +82,7 @@ export default function Navbar() {
                     </button>
                     
                     <div className={`md:flex ${mobileMenuOpen ? "block" : "hidden"} space-y-4 md:space-y-0 md:flex-row md:space-x-4`}>
-                        <Link to="#" className="text-tertiary hover:text-primary">Dashboard</Link>
+                        <Link to="/admin" className="text-tertiary hover:text-primary">Dashboard</Link>
                         <div
                             className="relative"
                             onMouseEnter={() => handleMouseEnter('profil')}
@@ -91,7 +91,7 @@ export default function Navbar() {
                             <button className="text-tertiary hover:text-primary">Profil</button>
                             {openDropdown.profil && (
                                 <div className="absolute bg-white border border-gray-200 rounded-lg shadow-lg">
-                                    <Link to="#" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Bagan Struktur</Link>
+                                    <Link to="/admin" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Bagan Struktur</Link>
                                     <Link to="/admin/struktur" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Struktur Detail</Link>
                                 </div>
                             )}
@@ -118,7 +118,7 @@ export default function Navbar() {
                             {openDropdown.desa && (
                                 <div className="absolute bg-white border border-gray-200 rounded-lg shadow-lg">
                                     <Link to="/admin/lembaga" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Lembaga</Link>
-                                    <Link to="/admin/tempatwisata" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Tempat Wisata</Link>
+                                    <Link to="/admin/wisata" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Tempat Wisata</Link>
                                     <Link to="/admin/prestasi" className="block px-4 py-2 text-tertiary hover:bg-gray-100">Prestasi</Link>
                                 </div>
                             )}
